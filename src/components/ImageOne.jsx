@@ -9,22 +9,21 @@
 // );
 
 // export default ImageOne
-
 import React, { useEffect, Suspense, useRef, useState } from 'react';
 import { Parallax } from 'react-parallax';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, MeshDistortMaterial, Float, Environment, Stars } from '@react-three/drei';
-import { Sparkles, Home, Sofa, Bed, UtensilsCrossed, Bath, Sun, Wine } from 'lucide-react';
-import img1 from '../image/villaDay.jpg'
-import img2 from '../image/img2.png'
-import img3 from '../image/img3.png'
-import img4 from '../image/img4.png'
-import img5 from '../image/img5.png'
-import img6 from '../image/img6.png'
-import img7 from '../image/img7.png'
-import img8 from '../image/img8.png'
+import { Sparkles, Home, Sofa, Bed, Palette, Lamp, Ruler, Award } from 'lucide-react';
+import img1 from '../image/villaDay.jpg';
+import img2 from '../image/img2.png';
+import img3 from '../image/img3.png';
+import img4 from '../image/img4.png';
+import img5 from '../image/img5.png';
+import img6 from '../image/img6.png';
+import img7 from '../image/img7.png';
+import img8 from '../image/img8.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,22 +116,22 @@ const LoadingScreen = ({ isLoading }) => {
           <div className="loading-ring"></div>
           <div className="loading-ring-2"></div>
           <div className="loading-icon-container">
-            <Home className="loading-icon" />
+            <Palette className="loading-icon" />
           </div>
         </div>
         <h1 className="loading-title">
-          <span>V</span><span>I</span><span>L</span><span>L</span><span>A</span>
-          <span className="space"> </span>
-          <span>S</span><span>E</span><span>R</span><span>E</span><span>N</span><span>I</span><span>T</span><span>Y</span>
+          <span>Z</span><span>A</span><span>I</span>
         </h1>
         <div className="loading-bar-container">
           <div className="loading-bar"></div>
           <div className="loading-bar-glow"></div>
         </div>
         <p className="loading-subtitle">
-          <span>C</span><span>r</span><span>a</span><span>f</span><span>t</span><span>i</span><span>n</span><span>g</span>
+          <span>I</span><span>n</span><span>t</span><span>e</span><span>r</span><span>i</span><span>o</span><span>r</span>
           <span className="space"> </span>
-          <span>L</span><span>u</span><span>x</span><span>u</span><span>r</span><span>y</span>
+          <span>D</span><span>e</span><span>s</span><span>i</span><span>g</span><span>n</span>
+          <span className="space"> </span>
+          <span>S</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span>
         </p>
         <div className="loading-particles">
           <div className="particle"></div>
@@ -302,12 +301,13 @@ const LuxuryVillaWebsite = () => {
         50% { opacity: 0.6; }
       }
       .loading-title {
-        font-size: 3.5rem;
+        font-size: 4.5rem;
         font-weight: 200;
         margin-bottom: 2.5rem;
         display: flex;
         justify-content: center;
-        gap: 0.3rem;
+        gap: 0.5rem;
+        letter-spacing: 0.3em;
       }
       .loading-title span {
         display: inline-block;
@@ -319,19 +319,8 @@ const LuxuryVillaWebsite = () => {
         text-shadow: 0 0 40px rgba(217, 119, 6, 0.5);
       }
       .loading-title span:nth-child(1) { animation-delay: 0s; }
-      .loading-title span:nth-child(2) { animation-delay: 0.1s; }
-      .loading-title span:nth-child(3) { animation-delay: 0.2s; }
-      .loading-title span:nth-child(4) { animation-delay: 0.3s; }
-      .loading-title span:nth-child(5) { animation-delay: 0.4s; }
-      .loading-title span:nth-child(7) { animation-delay: 0.6s; }
-      .loading-title span:nth-child(8) { animation-delay: 0.7s; }
-      .loading-title span:nth-child(9) { animation-delay: 0.8s; }
-      .loading-title span:nth-child(10) { animation-delay: 0.9s; }
-      .loading-title span:nth-child(11) { animation-delay: 1s; }
-      .loading-title span:nth-child(12) { animation-delay: 1.1s; }
-      .loading-title span:nth-child(13) { animation-delay: 1.2s; }
-      .loading-title span:nth-child(14) { animation-delay: 1.3s; }
-      .loading-title .space { width: 1rem; }
+      .loading-title span:nth-child(2) { animation-delay: 0.2s; }
+      .loading-title span:nth-child(3) { animation-delay: 0.4s; }
       @keyframes letterPop {
         0%, 100% { 
           transform: translateY(0) scale(1);
@@ -390,6 +379,7 @@ const LuxuryVillaWebsite = () => {
         display: flex;
         justify-content: center;
         gap: 0.15rem;
+        flex-wrap: wrap;
       }
       .loading-subtitle span {
         display: inline-block;
@@ -409,6 +399,13 @@ const LuxuryVillaWebsite = () => {
       .loading-subtitle span:nth-child(13) { animation-delay: 1.3s; }
       .loading-subtitle span:nth-child(14) { animation-delay: 1.4s; }
       .loading-subtitle span:nth-child(15) { animation-delay: 1.5s; }
+      .loading-subtitle span:nth-child(16) { animation-delay: 1.6s; }
+      .loading-subtitle span:nth-child(17) { animation-delay: 1.7s; }
+      .loading-subtitle span:nth-child(18) { animation-delay: 1.8s; }
+      .loading-subtitle span:nth-child(19) { animation-delay: 1.9s; }
+      .loading-subtitle span:nth-child(20) { animation-delay: 2.0s; }
+      .loading-subtitle span:nth-child(21) { animation-delay: 2.1s; }
+      .loading-subtitle span:nth-child(22) { animation-delay: 2.2s; }
       .loading-subtitle .space { width: 0.5rem; }
       @keyframes fadeInLetter {
         0%, 100% { opacity: 0.4; transform: translateY(0); }
@@ -653,8 +650,9 @@ const LuxuryVillaWebsite = () => {
       }
       @media (max-width: 768px) {
         .loading-title {
-          font-size: 2rem;
-          gap: 0.15rem;
+          font-size: 2.8rem;
+          gap: 0.3rem;
+          letter-spacing: 0.2em;
         }
         .loading-icon {
           width: 50px;
@@ -717,18 +715,18 @@ const LuxuryVillaWebsite = () => {
         </div>
         <div className="content">
           <div className="content-wrapper">
-            <Sparkles className="content-icon" />
-            <span className="img-txt">Villa Serenity</span>
+            <Palette className="content-icon" />
+            <span className="img-txt">ZAI Design</span>
           </div>
         </div>
       </Parallax>
-      <TextBox title="Welcome to Luxury" icon={Home}>
-        <p>Experience modern architectural design combined with timeless elegance. Villa Serenity represents luxury living where every detail creates sophistication and comfort.</p>
-        <p>This magnificent 8,500 square foot property features floor-to-ceiling windows, Italian marble floors, and custom millwork throughout.</p>
+      <TextBox title="Welcome to ZAI" icon={Home}>
+        <p>ZAI is a premier interior design studio specializing in creating bespoke, luxurious living spaces that reflect your unique style and personality.</p>
+        <p>With over 15 years of experience, we transform homes into masterpieces of modern elegance and functional beauty.</p>
         <div className="text-box-features">
-          <div className="feature-card"><div className="feature-number">6</div><div className="feature-label">Bedrooms</div></div>
-          <div className="feature-card"><div className="feature-number">7</div><div className="feature-label">Bathrooms</div></div>
-          <div className="feature-card"><div className="feature-number">8,500</div><div className="feature-label">Square Feet</div></div>
+          <div className="feature-card"><div className="feature-number">15+</div><div className="feature-label">Years Experience</div></div>
+          <div className="feature-card"><div className="feature-number">200+</div><div className="feature-label">Projects Completed</div></div>
+          <div className="feature-card"><div className="feature-number">5★</div><div className="feature-label">Client Rating</div></div>
         </div>
       </TextBox>
       <Parallax className="image" blur={0} bgImage={img2} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -738,16 +736,16 @@ const LuxuryVillaWebsite = () => {
         <div className="content">
           <div className="content-wrapper">
             <Sofa className="content-icon" />
-            <span className="img-txt">Living Space</span>
+            <span className="img-txt">Living Spaces</span>
           </div>
         </div>
       </Parallax>
-      <TextBox title="Expansive Living Area" icon={Sofa}>
-        <p>The grand living room features soaring ceilings and an open floor plan connecting indoor and outdoor spaces. Custom Italian furniture creates intimate areas while maintaining grandeur.</p>
-        <p>Floor-to-ceiling windows frame breathtaking views with a contemporary fireplace and smart home technology controlling lighting and climate.</p>
+      <TextBox title="Art of Living" icon={Sofa}>
+        <p>We craft living rooms that blend comfort with sophistication. From custom furniture layouts to curated art collections, every detail is thoughtfully designed.</p>
+        <p>Our signature style combines contemporary minimalism with warm, inviting textures and personalized lighting schemes.</p>
         <div className="text-box-features">
-          <div className="feature-card"><div className="feature-number">850</div><div className="feature-label">Square Feet</div></div>
-          <div className="feature-card"><div className="feature-number">20ft</div><div className="feature-label">Ceiling Height</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Custom Layouts</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Smart Lighting</div></div>
         </div>
       </TextBox>
       <Parallax className="image" blur={0} bgImage={img3} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -756,17 +754,17 @@ const LuxuryVillaWebsite = () => {
         </div>
         <div className="content">
           <div className="content-wrapper">
-            <UtensilsCrossed className="content-icon" />
-            <span className="img-txt">Culinary Haven</span>
+            <Palette className="content-icon" />
+            <span className="img-txt">Color & Texture</span>
           </div>
         </div>
       </Parallax>
-      <TextBox title="Gourmet Kitchen" icon={UtensilsCrossed}>
-        <p>A chef's dream with top-of-the-line Miele appliances, professional-grade range, dual ovens, and wine preservation system. Custom teak cabinetry and oversized island with Calacatta marble.</p>
-        <p>The formal dining area seats twelve beneath a statement chandelier. Temperature-controlled wine cellar stores 200+ bottles with butler's pantry for entertaining.</p>
+      <TextBox title="Material Mastery" icon={Palette}>
+        <p>Our designers are experts in material selection - from Italian marble to sustainable woods, luxury fabrics to artisanal tiles.</p>
+        <p>We source globally to bring you exclusive finishes that elevate your space beyond the ordinary.</p>
         <div className="text-box-features">
-          <div className="feature-card"><div className="feature-number">200+</div><div className="feature-label">Wine Bottles</div></div>
-          <div className="feature-card"><div className="feature-number">12</div><div className="feature-label">Seat Dining</div></div>
+          <div className="feature-card"><div className="feature-number">50+</div><div className="feature-label">Premium Vendors</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Sustainable Options</div></div>
         </div>
       </TextBox>
       <Parallax className="image" blur={0} bgImage={img4} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -776,16 +774,16 @@ const LuxuryVillaWebsite = () => {
         <div className="content">
           <div className="content-wrapper">
             <Bed className="content-icon" />
-            <span className="img-txt">Master Retreat</span>
+            <span className="img-txt">Bedroom Sanctuaries</span>
           </div>
         </div>
       </Parallax>
-      <TextBox title="Private Sanctuary" icon={Bed}>
-        <p>The master suite spans 650 square feet with custom king bed in Egyptian cotton linens. A sitting area with fireplace provides perfect relaxation with smart home controls.</p>
-        <p>Private balcony access offers stunning views. Dual walk-in closets feature custom organization with a private office nook and reading alcove.</p>
+      <TextBox title="Restful Retreats" icon={Bed}>
+        <p>Create your personal oasis with custom headboards, layered lighting, and premium linens. We design bedrooms for restorative sleep and serene mornings.</p>
+        <p>From walk-in wardrobes to en-suite spa bathrooms, every element promotes tranquility and luxury.</p>
         <div className="text-box-features">
-          <div className="feature-card"><div className="feature-number">650</div><div className="feature-label">Square Feet</div></div>
-          <div className="feature-card"><div className="feature-number">2</div><div className="feature-label">Walk-in Closets</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Custom Closets</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Layered Lighting</div></div>
         </div>
       </TextBox>
       <Parallax className="image" blur={0} bgImage={img5} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -794,18 +792,18 @@ const LuxuryVillaWebsite = () => {
         </div>
         <div className="content">
           <div className="content-wrapper">
-            <Bath className="content-icon" />
-            <span className="img-txt">Spa Oasis</span>
+            <Lamp className="content-icon" />
+            <span className="img-txt">Lighting Design</span>
           </div>
         </div>
       </Parallax>
-      <TextBox title="Luxury Spa Bathroom" icon={Bath}>
-        <p>Transform your daily routine in this spa-inspired bathroom. Freestanding soaking tub, oversized rain shower with chromotherapy lighting and heated Calacatta marble floors.</p>
-        <p>Premium Kohler fixtures, his and hers vanities with Hollywood lighting, separate steam room, towel warmers, and smart mirror with integrated display.</p>
+      <TextBox title="Illumination Artistry" icon={Lamp}>
+        <p>Lighting is the soul of interior design. We create multi-layered lighting schemes with architectural integration and smart controls.</p>
+        <p>From statement chandeliers to hidden LED strips, every light source serves both function and ambiance.</p>
         <div className="text-box-features">
-          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Steam Room</div></div>
-          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Heated Floors</div></div>
-          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Smart Mirror</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Smart Controls</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Architectural Integration</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Custom Fixtures</div></div>
         </div>
       </TextBox>
       <Parallax className="image" blur={0} bgImage={img6} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -814,18 +812,18 @@ const LuxuryVillaWebsite = () => {
         </div>
         <div className="content">
           <div className="content-wrapper">
-            <Sun className="content-icon" />
-            <span className="img-txt">Outdoor Paradise</span>
+            <Ruler className="content-icon" />
+            <span className="img-txt">Space Planning</span>
           </div>
         </div>
       </Parallax>
-      <TextBox title="Alfresco Living" icon={Sun}>
-        <p>A 75-foot infinity pool merges with the horizon, featuring integrated jets, underwater LED lighting, and spa area. The 2,000 sq ft deck offers multiple lounging areas.</p>
-        <p>Covered pavilion with fully equipped outdoor kitchen. Award-winning landscaped gardens with mature trees, ambient lighting, fire pit, and outdoor bar.</p>
+      <TextBox title="Spatial Intelligence" icon={Ruler}>
+        <p>Maximize your home's potential with expert space planning. We optimize flow, functionality, and aesthetics in every square foot.</p>
+        <p>Our 3D modeling and virtual walkthroughs ensure perfect proportions before construction begins.</p>
         <div className="text-box-features">
-          <div className="feature-card"><div className="feature-number">75ft</div><div className="feature-label">Infinity Pool</div></div>
-          <div className="feature-card"><div className="feature-number">2,000</div><div className="feature-label">Sq Ft Deck</div></div>
-          <div className="feature-card"><div className="feature-number">0.5</div><div className="feature-label">Acre Gardens</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">3D Modeling</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Virtual Tours</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Flow Optimization</div></div>
         </div>
       </TextBox>
       <Parallax className="image" blur={0} bgImage={img7} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -834,18 +832,18 @@ const LuxuryVillaWebsite = () => {
         </div>
         <div className="content">
           <div className="content-wrapper">
-            <Sparkles className="content-icon" />
-            <span className="img-txt">Entertainment Hub</span>
+            <Award className="content-icon" />
+            <span className="img-txt">Award-Winning</span>
           </div>
         </div>
       </Parallax>
-      <TextBox title="Wellness & Entertainment" icon={Wine}>
-        <p>Lower level features private home theater with twelve motorized recliners, 4K laser projection, and Dolby Atmos sound. Fully equipped fitness center with Technogym equipment.</p>
-        <p>Yoga studio with zen garden views, separate sauna and recovery area. Wine tasting room with climate control, game room with billiards, and home office.</p>
+      <TextBox title="Design Excellence" icon={Award}>
+        <p>ZAI has been recognized with multiple design awards for innovative residential projects that push creative boundaries.</p>
+        <p>Featured in Architectural Digest, Elle Decor, and winner of the International Property Awards for Best Interior Design.</p>
         <div className="text-box-features">
-          <div className="feature-card"><div className="feature-number">12</div><div className="feature-label">Seat Theater</div></div>
-          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Private Gym</div></div>
-          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Yoga Studio</div></div>
+          <div className="feature-card"><div className="feature-number">12</div><div className="feature-label">Design Awards</div></div>
+          <div className="feature-card"><div className="feature-number">50+</div><div className="feature-label">Publications</div></div>
+          <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Global Recognition</div></div>
         </div>
       </TextBox>
       <Parallax className="image" blur={0} bgImage={img8} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -854,8 +852,8 @@ const LuxuryVillaWebsite = () => {
         </div>
         <div className="content">
           <div className="content-wrapper">
-            <Home className="content-icon" />
-            <span className="img-txt">Your Sanctuary Awaits</span>
+            <Sparkles className="content-icon" />
+            <span className="img-txt">Transform with ZAI</span>
           </div>
         </div>
       </Parallax>

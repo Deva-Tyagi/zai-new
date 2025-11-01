@@ -4,6 +4,7 @@ import ImageTwo from './components/ImageTwo'
 import ImageThree from './components/ImageThree'
 import TextBox from './components/TextBox'
 import LuxuryVillaWebsite from './components/ImageOne'
+import WordGateCarousel from './components/WordGateCarousal'
 // import SUYOStory from './components/SUYOStory'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <ImageThree /> */}
       {/* <SUYOStory /> */}
       <LuxuryVillaWebsite />
+      {/* <WordGateCarousel /> */}
     </div>
   );
 }
