@@ -25,77 +25,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, MeshDistortMaterial, Float, Environment, Stars } from '@react-three/drei';
 import { Sparkles, Home, Sofa, Bed, Palette, Lamp, Ruler, Award } from 'lucide-react';
+import img1 from '../image/villaDay.jpg';
+import img2 from '../image/img2.png';
+import img3 from '../image/img3.png';
+import img4 from '../image/img4.png';
+import img5 from '../image/img5.png';
+import img6 from '../image/img6.png';
+import img7 from '../image/img7.png';
+import img8 from '../image/img8.png';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const AnimatedSphere = ({ color }) => {
-  const meshRef = useRef();
-  useFrame(({ clock }) => {
-    meshRef.current.rotation.x = clock.getElapsedTime() * 0.2;
-    meshRef.current.rotation.y = clock.getElapsedTime() * 0.3;
-  });
-  return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <Sphere ref={meshRef} args={[1, 100, 100]} scale={2.5}>
-        <MeshDistortMaterial color={color} attach="material" distort={0.4} speed={2} roughness={0.2} metalness={0.8} />
-      </Sphere>
-    </Float>
-  );
-};
-
-const RotatingCube = () => {
-  const meshRef = useRef();
-  useFrame(({ clock }) => {
-    meshRef.current.rotation.x = clock.getElapsedTime() * 0.3;
-    meshRef.current.rotation.y = clock.getElapsedTime() * 0.4;
-  });
-  return (
-    <Float speed={1.5} rotationIntensity={1} floatIntensity={1}>
-      <mesh ref={meshRef}>
-        <boxGeometry args={[2, 2, 2]} />
-        <MeshDistortMaterial color="#b45309" attach="material" distort={0.3} speed={1.5} roughness={0.3} metalness={0.9} />
-      </mesh>
-    </Float>
-  );
-};
-
-const TorusKnot3D = () => {
-  const meshRef = useRef();
-  useFrame(({ clock }) => {
-    meshRef.current.rotation.x = clock.getElapsedTime() * 0.15;
-    meshRef.current.rotation.y = clock.getElapsedTime() * 0.25;
-  });
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1.5}>
-      <mesh ref={meshRef}>
-        <torusKnotGeometry args={[1, 0.3, 128, 16]} />
-        <MeshDistortMaterial color="#ea580c" attach="material" distort={0.2} speed={2} roughness={0.1} metalness={1} />
-      </mesh>
-    </Float>
-  );
-};
-
-const Scene3D = ({ type = 'sphere', color = '#d97706' }) => {
-  return (
-    <Canvas 
-      camera={{ position: [0, 0, 5], fov: 50 }}
-      style={{ background: 'transparent' }}
-      gl={{ alpha: true, antialias: true }}
-    >
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[10, 10, 5]} intensity={1.5} />
-        <pointLight position={[-10, -10, -5]} intensity={1} color={color} />
-        <pointLight position={[10, -10, -5]} intensity={0.8} color="#f59e0b" />
-        {type === 'sphere' && <AnimatedSphere color={color} />}
-        {type === 'cube' && <RotatingCube />}
-        {type === 'torus' && <TorusKnot3D />}
-        <Environment preset="sunset" />
-        {type === 'sphere' && <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />}
-      </Suspense>
-    </Canvas>
-  );
-};
 
 const TextBox = ({ title, children, icon: Icon }) => {
   return (
@@ -153,7 +92,6 @@ const HorizontalSection = ({ img, title, icon: Icon, direction = 'left', type = 
       <div className="horizontal-content" style={{ transform: direction === 'left' ? 'translateX(-100%)' : 'translateX(100%)' }}>
         <div className="horizontal-bg" style={{ backgroundImage: `url(${img})` }} />
         <div className="model-overlay-horizontal">
-          <Scene3D type={type} color={color} />
         </div>
         <div className="content">
           <div className="content-wrapper">
@@ -174,7 +112,6 @@ const RollerSection = ({ img, title, icon: Icon, type = 'sphere', color = '#d977
           <div className="roller-overlay"></div>
         </div>
         <div className="model-overlay model-center">
-          <Scene3D type={type} color={color} />
         </div>
         <div className="content">
           <div className="content-wrapper roller-content-wrapper">
@@ -195,7 +132,6 @@ const CircularRevealSection = ({ img, title, icon: Icon, type = 'cube', color = 
           <div className="circular-reveal-overlay"></div>
         </div>
         <div className="model-overlay model-left">
-          <Scene3D type={type} color={color} />
         </div>
         <div className="content">
           <div className="content-wrapper circular-reveal-content-wrapper">
@@ -1063,9 +999,8 @@ const LuxuryVillaWebsite = () => {
   return (
     <div>
       <LoadingScreen isLoading={loading} />
-      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      <Parallax className="image" blur={0} bgImage={img1} strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-right">
-          <Scene3D type="sphere" color="#d97706" />
         </div>
         <div className="content">
           <div className="content-wrapper">
@@ -1085,7 +1020,7 @@ const LuxuryVillaWebsite = () => {
       </TextBox>
       
       <HorizontalSection 
-        img="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920"
+        img={img2}
         title="Living Spaces"
         icon={Sofa}
         direction="left"
@@ -1103,7 +1038,7 @@ const LuxuryVillaWebsite = () => {
       </TextBox>
       
       <HorizontalSection 
-        img="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920"
+        img={img3}
         title="Color & Texture"
         icon={Palette}
         direction="right"
@@ -1121,7 +1056,7 @@ const LuxuryVillaWebsite = () => {
       </TextBox>
       
       <RollerSection 
-        img="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1920"
+        img={img4}
         title="Bedroom Sanctuaries"
         icon={Bed}
         type="sphere"
@@ -1138,7 +1073,7 @@ const LuxuryVillaWebsite = () => {
       </TextBox>
       
       <CircularRevealSection 
-        img="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1920"
+        img={img5}
         title="Lighting Design"
         icon={Lamp}
         type="cube"
@@ -1155,9 +1090,8 @@ const LuxuryVillaWebsite = () => {
         </div>
       </TextBox>
       
-      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      <Parallax className="image" blur={0} bgImage={img6} strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-right">
-          <Scene3D type="torus" color="#fb923c" />
         </div>
         <div className="content">
           <div className="content-wrapper">
@@ -1177,9 +1111,8 @@ const LuxuryVillaWebsite = () => {
         </div>
       </TextBox>
       
-      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1618221710640-c0eaaa2adb4c?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      <Parallax className="image" blur={0} bgImage={img7} strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-center">
-          <Scene3D type="sphere" color="#d97706" />
         </div>
         <div className="content">
           <div className="content-wrapper">
@@ -1199,9 +1132,8 @@ const LuxuryVillaWebsite = () => {
         </div>
       </TextBox>
       
-      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      <Parallax className="image" blur={0} bgImage={img8} strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-center">
-          <Scene3D type="torus" color="#f59e0b" />
         </div>
         <div className="content">
           <div className="content-wrapper">
