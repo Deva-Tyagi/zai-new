@@ -309,30 +309,27 @@ const LuxuryVillaWebsite = () => {
         const circularBg = section.querySelector('.circular-reveal-bg');
         const contentWrapper = section.querySelector('.circular-reveal-content-wrapper');
         
-        gsap.fromTo(circularBg,
-          {
-            clipPath: 'circle(0% at 50% 50%)',
-          },
-          {
-            clipPath: 'circle(100% at 50% 50%)',
-            ease: 'power2.inOut',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top top',
-              end: 'bottom bottom',
-              scrub: 1.5,
-              onEnter: () => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top 5%',
+          end: 'top 5%',
+          once: true,
+          onEnter: () => {
+            gsap.to(circularBg, {
+              clipPath: 'circle(100% at 50% 50%)',
+              duration: 1.45,
+              ease: 'power2.inOut',
+              onComplete: () => {
                 gsap.to(contentWrapper, {
                   opacity: 1,
                   scale: 1,
-                  duration: 1.8,
-                  delay: 0.3,
+                  duration: 0.8,
                   ease: 'back.out(1.4)'
                 });
               }
-            }
+            });
           }
-        );
+        });
       });
 
       gsap.utils.toArray('.text-box').forEach((box) => {
