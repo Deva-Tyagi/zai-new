@@ -9,6 +9,15 @@
 // );
 
 // export default ImageOne
+
+// import img1 from '../image/villaDay.jpg';
+// import img2 from '../image/img2.png';
+// import img3 from '../image/img3.png';
+// import img4 from '../image/img4.png';
+// import img5 from '../image/img5.png';
+// import img6 from '../image/img6.png';
+// import img7 from '../image/img7.png';
+// import img8 from '../image/img8.png';
 import React, { useEffect, Suspense, useRef, useState } from 'react';
 import { Parallax } from 'react-parallax';
 import { gsap } from 'gsap';
@@ -16,14 +25,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, MeshDistortMaterial, Float, Environment, Stars } from '@react-three/drei';
 import { Sparkles, Home, Sofa, Bed, Palette, Lamp, Ruler, Award } from 'lucide-react';
-import img1 from '../image/villaDay.jpg';
-import img2 from '../image/img2.png';
-import img3 from '../image/img3.png';
-import img4 from '../image/img4.png';
-import img5 from '../image/img5.png';
-import img6 from '../image/img6.png';
-import img7 from '../image/img7.png';
-import img8 from '../image/img8.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,6 +147,67 @@ const LoadingScreen = ({ isLoading }) => {
   );
 };
 
+const HorizontalSection = ({ img, title, icon: Icon, direction = 'left', type = 'sphere', color = '#d97706' }) => {
+  return (
+    <div className="horizontal-section">
+      <div className="horizontal-content" style={{ transform: direction === 'left' ? 'translateX(-100%)' : 'translateX(100%)' }}>
+        <div className="horizontal-bg" style={{ backgroundImage: `url(${img})` }} />
+        <div className="model-overlay-horizontal">
+          <Scene3D type={type} color={color} />
+        </div>
+        <div className="content">
+          <div className="content-wrapper">
+            <Icon className="content-icon" />
+            <span className="img-txt">{title}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RollerSection = ({ img, title, icon: Icon, type = 'sphere', color = '#d97706' }) => {
+  return (
+    <div className="roller-section">
+      <div className="roller-container">
+        <div className="roller-bg" style={{ backgroundImage: `url(${img})` }}>
+          <div className="roller-overlay"></div>
+        </div>
+        <div className="model-overlay model-center">
+          <Scene3D type={type} color={color} />
+        </div>
+        <div className="content">
+          <div className="content-wrapper roller-content-wrapper">
+            <Icon className="content-icon" />
+            <span className="img-txt">{title}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CircularRevealSection = ({ img, title, icon: Icon, type = 'cube', color = '#c2410c' }) => {
+  return (
+    <div className="circular-reveal-section">
+      <div className="circular-reveal-container">
+        <div className="circular-reveal-bg" style={{ backgroundImage: `url(${img})` }}>
+          <div className="circular-reveal-overlay"></div>
+        </div>
+        <div className="model-overlay model-left">
+          <Scene3D type={type} color={color} />
+        </div>
+        <div className="content">
+          <div className="content-wrapper circular-reveal-content-wrapper">
+            <Icon className="content-icon" />
+            <span className="img-txt">{title}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const LuxuryVillaWebsite = () => {
   const [loading, setLoading] = useState(true);
 
@@ -167,17 +229,123 @@ const LuxuryVillaWebsite = () => {
           scrub: 1,
         });
       });
+
+      // Horizontal scroll sections with optimized animations
+      const horizontalSections = gsap.utils.toArray('.horizontal-section');
+      horizontalSections.forEach((section, index) => {
+        const content = section.querySelector('.horizontal-content');
+        const direction = index % 2 === 0 ? '-100%' : '100%';
+        
+        gsap.fromTo(content, 
+          { 
+            x: direction,
+            opacity: 0,
+          },
+          {
+            x: '0%',
+            opacity: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              end: 'top 30%',
+              scrub: 1.5,
+              once: false,
+            }
+          }
+        );
+
+        const bg = section.querySelector('.horizontal-bg');
+        gsap.fromTo(bg,
+          { x: direction === '-100%' ? '15%' : '-15%' },
+          {
+            x: direction === '-100%' ? '-15%' : '15%',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.5,
+            }
+          }
+        );
+      });
+
+      // Optimized roller poster animation
+      const rollerSections = gsap.utils.toArray('.roller-section');
+      rollerSections.forEach((section) => {
+        const rollerBg = section.querySelector('.roller-bg');
+        const contentWrapper = section.querySelector('.roller-content-wrapper');
+        
+        gsap.fromTo(rollerBg,
+          {
+            clipPath: 'inset(0% 0% 100% 0%)',
+          },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            ease: 'power2.inOut',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              end: 'top 30%',
+              scrub: 1.5,
+              onEnter: () => {
+                gsap.to(contentWrapper, {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.6,
+                  delay: 0.2,
+                  ease: 'power2.out'
+                });
+              }
+            }
+          }
+        );
+      });
+
+      // Circular reveal animation for Lighting Design
+      const circularSections = gsap.utils.toArray('.circular-reveal-section');
+      circularSections.forEach((section) => {
+        const circularBg = section.querySelector('.circular-reveal-bg');
+        const contentWrapper = section.querySelector('.circular-reveal-content-wrapper');
+        
+        gsap.fromTo(circularBg,
+          {
+            clipPath: 'circle(0% at 50% 50%)',
+          },
+          {
+            clipPath: 'circle(100% at 50% 50%)',
+            ease: 'power2.inOut',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1.5,
+              onEnter: () => {
+                gsap.to(contentWrapper, {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 1.8,
+                  delay: 0.3,
+                  ease: 'back.out(1.4)'
+                });
+              }
+            }
+          }
+        );
+      });
+
       gsap.utils.toArray('.text-box').forEach((box) => {
         gsap.from(box.children, {
           opacity: 0,
-          y: 50,
-          stagger: 0.2,
-          duration: 1,
-          ease: 'power3.out',
+          y: 30,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: box,
-            start: 'top 80%',
-            end: 'top 50%',
+            start: 'top 85%',
+            end: 'top 60%',
             toggleActions: 'play none none reverse',
           },
         });
@@ -492,6 +660,195 @@ const LuxuryVillaWebsite = () => {
         z-index: 2;
         padding: 2rem;
       }
+      .horizontal-section {
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background: #000;
+      }
+      .horizontal-content {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
+      .horizontal-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
+      .horizontal-bg::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+      }
+      .roller-section {
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background: #000;
+      }
+      .roller-container {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .roller-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+        clip-path: inset(0% 0% 100% 0%);
+        will-change: clip-path;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
+      .roller-bg::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        background: linear-gradient(180deg, 
+          rgba(217, 119, 6, 0.8) 0%,
+          rgba(217, 119, 6, 0.5) 50%,
+          transparent 100%);
+        box-shadow: 0 5px 30px rgba(217, 119, 6, 0.6);
+        z-index: 2;
+        filter: blur(2px);
+      }
+      .roller-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+      }
+      .roller-content-wrapper {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      .circular-reveal-section {
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background: #000;
+      }
+      .circular-reveal-container {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .circular-reveal-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+        clip-path: circle(0% at 50% 50%);
+        will-change: clip-path;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
+      .circular-reveal-bg::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: radial-gradient(circle, 
+          rgba(217, 119, 6, 0.8) 0%,
+          rgba(217, 119, 6, 0.4) 50%,
+          transparent 100%);
+        box-shadow: 0 0 80px rgba(217, 119, 6, 0.8),
+                    0 0 120px rgba(217, 119, 6, 0.6);
+        z-index: 2;
+        animation: pulseGlow 2s ease-in-out infinite;
+      }
+      @keyframes pulseGlow {
+        0%, 100% { 
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 0.8;
+        }
+        50% { 
+          transform: translate(-50%, -50%) scale(1.2);
+          opacity: 1;
+        }
+      }
+      .circular-reveal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+      }
+      .circular-reveal-content-wrapper {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      .model-overlay-horizontal {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        opacity: 0.8;
+      }
+      .horizontal-content .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
       .content-wrapper {
         max-width: 800px;
         text-align: center;
@@ -691,7 +1048,7 @@ const LuxuryVillaWebsite = () => {
         .text-box {
           padding: 3rem 1.5rem;
         }
-        .model-right, .model-left {
+        .model-right, .model-left, .model-overlay-horizontal {
           width: 70%;
         }
         .model-center {
@@ -709,7 +1066,7 @@ const LuxuryVillaWebsite = () => {
   return (
     <div>
       <LoadingScreen isLoading={loading} />
-      <Parallax className="image" blur={0} bgImage={img1} strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-right">
           <Scene3D type="sphere" color="#d97706" />
         </div>
@@ -729,17 +1086,16 @@ const LuxuryVillaWebsite = () => {
           <div className="feature-card"><div className="feature-number">5★</div><div className="feature-label">Client Rating</div></div>
         </div>
       </TextBox>
-      <Parallax className="image" blur={0} bgImage={img2} strength={800} bgImageStyle={{minHeight:"100vh"}}>
-        <div className="model-overlay model-left">
-          <Scene3D type="cube" color="#b45309" />
-        </div>
-        <div className="content">
-          <div className="content-wrapper">
-            <Sofa className="content-icon" />
-            <span className="img-txt">Living Spaces</span>
-          </div>
-        </div>
-      </Parallax>
+      
+      <HorizontalSection 
+        img="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920"
+        title="Living Spaces"
+        icon={Sofa}
+        direction="left"
+        type="cube"
+        color="#b45309"
+      />
+      
       <TextBox title="Art of Living" icon={Sofa}>
         <p>We craft living rooms that blend comfort with sophistication. From custom furniture layouts to curated art collections, every detail is thoughtfully designed.</p>
         <p>Our signature style combines contemporary minimalism with warm, inviting textures and personalized lighting schemes.</p>
@@ -748,17 +1104,16 @@ const LuxuryVillaWebsite = () => {
           <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Smart Lighting</div></div>
         </div>
       </TextBox>
-      <Parallax className="image" blur={0} bgImage={img3} strength={800} bgImageStyle={{minHeight:"100vh"}}>
-        <div className="model-overlay model-right">
-          <Scene3D type="torus" color="#ea580c" />
-        </div>
-        <div className="content">
-          <div className="content-wrapper">
-            <Palette className="content-icon" />
-            <span className="img-txt">Color & Texture</span>
-          </div>
-        </div>
-      </Parallax>
+      
+      <HorizontalSection 
+        img="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920"
+        title="Color & Texture"
+        icon={Palette}
+        direction="right"
+        type="torus"
+        color="#ea580c"
+      />
+      
       <TextBox title="Material Mastery" icon={Palette}>
         <p>Our designers are experts in material selection - from Italian marble to sustainable woods, luxury fabrics to artisanal tiles.</p>
         <p>We source globally to bring you exclusive finishes that elevate your space beyond the ordinary.</p>
@@ -767,17 +1122,15 @@ const LuxuryVillaWebsite = () => {
           <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Sustainable Options</div></div>
         </div>
       </TextBox>
-      <Parallax className="image" blur={0} bgImage={img4} strength={800} bgImageStyle={{minHeight:"100vh"}}>
-        <div className="model-overlay model-center">
-          <Scene3D type="sphere" color="#f59e0b" />
-        </div>
-        <div className="content">
-          <div className="content-wrapper">
-            <Bed className="content-icon" />
-            <span className="img-txt">Bedroom Sanctuaries</span>
-          </div>
-        </div>
-      </Parallax>
+      
+      <RollerSection 
+        img="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1920"
+        title="Bedroom Sanctuaries"
+        icon={Bed}
+        type="sphere"
+        color="#f59e0b"
+      />
+      
       <TextBox title="Restful Retreats" icon={Bed}>
         <p>Create your personal oasis with custom headboards, layered lighting, and premium linens. We design bedrooms for restorative sleep and serene mornings.</p>
         <p>From walk-in wardrobes to en-suite spa bathrooms, every element promotes tranquility and luxury.</p>
@@ -786,17 +1139,15 @@ const LuxuryVillaWebsite = () => {
           <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Layered Lighting</div></div>
         </div>
       </TextBox>
-      <Parallax className="image" blur={0} bgImage={img5} strength={800} bgImageStyle={{minHeight:"100vh"}}>
-        <div className="model-overlay model-left">
-          <Scene3D type="cube" color="#c2410c" />
-        </div>
-        <div className="content">
-          <div className="content-wrapper">
-            <Lamp className="content-icon" />
-            <span className="img-txt">Lighting Design</span>
-          </div>
-        </div>
-      </Parallax>
+      
+      <CircularRevealSection 
+        img="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1920"
+        title="Lighting Design"
+        icon={Lamp}
+        type="cube"
+        color="#c2410c"
+      />
+      
       <TextBox title="Illumination Artistry" icon={Lamp}>
         <p>Lighting is the soul of interior design. We create multi-layered lighting schemes with architectural integration and smart controls.</p>
         <p>From statement chandeliers to hidden LED strips, every light source serves both function and ambiance.</p>
@@ -806,7 +1157,8 @@ const LuxuryVillaWebsite = () => {
           <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Custom Fixtures</div></div>
         </div>
       </TextBox>
-      <Parallax className="image" blur={0} bgImage={img6} strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      
+      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-right">
           <Scene3D type="torus" color="#fb923c" />
         </div>
@@ -817,6 +1169,7 @@ const LuxuryVillaWebsite = () => {
           </div>
         </div>
       </Parallax>
+      
       <TextBox title="Spatial Intelligence" icon={Ruler}>
         <p>Maximize your home's potential with expert space planning. We optimize flow, functionality, and aesthetics in every square foot.</p>
         <p>Our 3D modeling and virtual walkthroughs ensure perfect proportions before construction begins.</p>
@@ -826,7 +1179,8 @@ const LuxuryVillaWebsite = () => {
           <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Flow Optimization</div></div>
         </div>
       </TextBox>
-      <Parallax className="image" blur={0} bgImage={img7} strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      
+      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1618221710640-c0eaaa2adb4c?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-center">
           <Scene3D type="sphere" color="#d97706" />
         </div>
@@ -837,6 +1191,7 @@ const LuxuryVillaWebsite = () => {
           </div>
         </div>
       </Parallax>
+      
       <TextBox title="Design Excellence" icon={Award}>
         <p>ZAI has been recognized with multiple design awards for innovative residential projects that push creative boundaries.</p>
         <p>Featured in Architectural Digest, Elle Decor, and winner of the International Property Awards for Best Interior Design.</p>
@@ -846,7 +1201,8 @@ const LuxuryVillaWebsite = () => {
           <div className="feature-card"><div className="feature-number">✓</div><div className="feature-label">Global Recognition</div></div>
         </div>
       </TextBox>
-      <Parallax className="image" blur={0} bgImage={img8} strength={800} bgImageStyle={{minHeight:"100vh"}}>
+      
+      <Parallax className="image" blur={0} bgImage="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920" strength={800} bgImageStyle={{minHeight:"100vh"}}>
         <div className="model-overlay model-center">
           <Scene3D type="torus" color="#f59e0b" />
         </div>
