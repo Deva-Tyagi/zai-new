@@ -1,0 +1,9 @@
+/* animation helpers that GSAP can toggle via classes */
+.fade-in { opacity: 0; transform: translate3d(0, 20px, 0); will-change: transform, opacity; }
+.fade-in.is-visible { opacity: 1; transform: translate3d(0,0,0); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.9,.2,1); }
+
+.hero-text { text-shadow: 0 6px 24px rgba(0,0,0,0.45); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .fade-in.is-visible { transition: none !important; transform: none !important; }
+}

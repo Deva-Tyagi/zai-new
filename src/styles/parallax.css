@@ -1,0 +1,17 @@
+/* parallax transforms & container classes */
+.parallax-section { position: relative; overflow: hidden; }
+.parallax-outer { position: absolute; left:0; top:0; width:100%; height:100%; will-change: transform; pointer-events: none; }
+.parallax-inner { position: absolute; left:0; top:0; width:100%; height:100%; will-change: transform; transform: translate3d(0,0,0); }
+
+/* inner cursor transform uses CSS vars; set --depth on element */
+.parallax-inner[data-mouse-reactive="true"] {
+  transform: translate3d(calc(var(--cursor-x) * var(--depth) * 1px), calc(var(--cursor-y) * var(--depth) * 1px), 0);
+}
+
+/* Image layer helper */
+.layer-img { width:100%; height:100%; object-fit: cover; display:block; }
+
+/* reduce motion handling */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-inner[data-mouse-reactive="true"] { transform: none !important; }
+}

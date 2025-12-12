@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import vanilla css files for animations, layers, parallax transforms */
+@import "./parallax.css";
+@import "./animations.css";
+@import "./layers.css";
+
+:root{
+  --cursor-x: 0;
+  --cursor-y: 0;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root { --cursor-x: 0; --cursor-y: 0; }
+  * { transition: none !important; animation: none !important; }
+}
