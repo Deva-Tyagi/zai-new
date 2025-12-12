@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 export default function VillaWebsite() {
+  const section2Ref = useRef(null);
+  const section3Ref = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!section2Ref.current || !section3Ref.current) return;
+
+      const section2 = section2Ref.current;
+      const section2Rect = section2.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Check if section 2 bottom has reached the bottom of viewport
+      if (section2Rect.bottom <= windowHeight) {
+        // Calculate how much to move section 3 up
+        const overlapAmount = windowHeight - section2Rect.bottom;
+        section3Ref.current.style.transform = `translateY(-${overlapAmount}px)`;
+      } else {
+        section3Ref.current.style.transform = 'translateY(0)';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="relative w-full overflow-hidden bg-gray-900">
       <style>{`
@@ -34,7 +61,7 @@ export default function VillaWebsite() {
       `}</style>
 
       {/* Main Container - All sections overlap */}
-      <div className="villa-container relative" style={{ width: "1920px", height: "3140px" }}>
+      <div className="villa-container relative" style={{ width: "1920px", height: "2550px" }}>
         {/* SECTION 1 - Hero Section */}
         <div
           className="absolute top-0 left-0 w-full"
@@ -206,6 +233,7 @@ export default function VillaWebsite() {
 
         {/* SECTION 2 - Waterfall Section (Overlapping with Section 1) */}
         <div
+          ref={section2Ref}
           className="absolute w-full"
           style={{ height: "1209px", top: "871px" }}
         >
@@ -282,6 +310,7 @@ export default function VillaWebsite() {
               height: "486.55px",
               top: "630.73px",
               left: "888px",
+              
             }}
           />
 
@@ -341,10 +370,17 @@ export default function VillaWebsite() {
           />
         </div>
 
-        {/* SECTION 3 - Dining Section (Overlapping with Section 2) */}
+        {/* SECTION 3 - Dining Section (Will overlap Section 2) */}
         <div
+          ref={section3Ref}
           className="absolute w-full"
-          style={{ height: "1081px", top: "2059px" }}
+          style={{ 
+            height: "1081px", 
+            top: "2059px",
+            transition: "transform 0.1s ease-out",
+            willChange: "transform",
+            zIndex:"2"
+          }}
         >
           {/* Full BG Gradient */}
           <img
@@ -367,7 +403,6 @@ export default function VillaWebsite() {
             style={{
               width: "387px",
               height: "1115px",
-              top: "-34px",
               left: "916px",
               transform: "rotate(-180deg)",
             }}
@@ -384,7 +419,6 @@ export default function VillaWebsite() {
             style={{
               width: "418px",
               height: "1093px",
-              top: "-12px",
               left: "1050px",
               objectFit: "cover",
               pointerEvents: "none"
