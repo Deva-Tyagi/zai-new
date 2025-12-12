@@ -105,7 +105,7 @@ export default function VillaWebsite() {
       `}</style>
 
       {/* Main Container - All sections overlap */}
-      <div className="villa-container relative" style={{ width: "1920px", height: "2550px" }}>
+      <div className="villa-container relative" style={{ width: "1920px", height: "2650px" }}>
         {/* SECTION 1 - Hero Section */}
         <div
           className="absolute top-0 left-0 w-full"
